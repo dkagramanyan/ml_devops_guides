@@ -33,3 +33,15 @@ my_password = "spam-and-eggs"
 hashed_password = passwd(passphrase=my_password, algorithm='sha256')
 print(hashed_password)
 ~~~
+
+Формирование конфига
+
+~~~
+jupyter lab --generate-config
+~~~
+
+Для изменения ip адреса нужно в конфиге заменить строчку
+
+~~~
+c.ServerApp.ip ='xxx.xxx.xxx.xxx'
+~~~
