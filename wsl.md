@@ -50,7 +50,7 @@ hostAddressLoopback=True
 wsl -e bash -c "cd; ./jupyter_start.sh"
 ~~~
 
-2) в wsl нужно создать .sh скрипт и внутри написать
+2) в wsl нужно создать jupyter_start.sh скрипт и внутри написать
 ~~~
 source ~/anaconda3/etc/profile.d/conda.sh
 
