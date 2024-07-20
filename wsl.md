@@ -37,6 +37,7 @@ hostAddressLoopback=True
 [wsl2]
 networkingMode=mirrored
 memory=30GB
+processors=8
 [experimental]
 hostAddressLoopback=True
 ~~~
