@@ -65,7 +65,13 @@ hashed_password = passwd(passphrase=my_password, algorithm='sha256')
 print(hashed_password)
 ~~~
 
-3) изменим айпишник, чтобы можно было извне стучаться к серверу. Для жтого нужно изменить конфиг
+В конфиге добавляем хеш пароля
+
+~~~
+c.NotebookApp.password = u'sha256:bcd259ccf...<your hashed password here>'
+~~~
+
+3) изменим айпишник, чтобы можно было извне стучаться к серверу. Для этого нужно изменить конфиг
 
 ~~~
 c.ServerApp.ip ='xxx.xxx.xxx.xxx'
