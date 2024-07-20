@@ -12,13 +12,15 @@
 
 ~~~
 /ip firewall nat
-add action=dst-nat chain=dstnat dst-address=100.100.100.100 dst-port=443 protocol=tcp to-addresses=192.168.88.53 to-port=8888
+add action=dst-nat chain=dstnat dst-address=100.100.100.100 dst-port=443 protocol=tcp \
+to-addresses=192.168.88.53 to-port=8888
 ~~~
 
 2) ds
 
 ~~~
-add action=masquerade chain=srcnat dst-address=192.168.88.53 dst-port=8888 protocol=tcp src-address=192.168.88.0/24
+add action=masquerade chain=srcnat dst-address=192.168.88.53 dst-port=8888 protocol=tcp \
+src-address=192.168.88.0/24
 ~~~
 
 
