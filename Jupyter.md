@@ -1,6 +1,6 @@
 ## Jupyter
 
-### Алгоритм настройки jupyter notebook/lab
+### Базовая настройка jupyter notebook/lab
 
 1) Создается окружение Anaconda/venv
 
