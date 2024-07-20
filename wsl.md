@@ -5,7 +5,7 @@ WSL
 
 1) пробросить порты через [прокси](https://superuser.com/questions/1717753/how-to-connect-to-windows-subsystem-for-linux-from-another-machine-within-networ)
 2) сделатть зеркальную [сеть](https://superuser.com/questions/1717753/how-to-connect-to-windows-subsystem-for-linux-from-another-machine-within-networ) (не работает на windows 10, работает на windows 11).  Hyper-V Firewall [не работает на windows 10](https://github.com/microsoft/WSL/discussions/11380)
-3) сделать мост между сетями (не заработало). Рабочий вариант с мостом тут (нестабильное решение). Важно, что по итогу в powershell были использованы следующие команды. Вторая команда не нужна
+3) сделать  [мост](https://develmonk.com/2021/06/05/easiest-wsl2-bridge-network-without-hyper-v-virtual-network-manager/) между сетями (не заработало). Рабочий вариант с мостом [тут](https://github.com/microsoft/WSL/discussions/9227#discussioncomment-6764641) (нестабильное решение). Важно, что по итогу в powershell были использованы следующие команды. Вторая команда не нужна
 
 ~~~
 Set-VMSwitch -name "WSL" -NetAdapterName "Ethernet" -AllowManagementOS $true
