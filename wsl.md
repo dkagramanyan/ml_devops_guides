@@ -5,11 +5,14 @@ WSL
 
 1) пробросить порты через [прокси](https://superuser.com/questions/1717753/how-to-connect-to-windows-subsystem-for-linux-from-another-machine-within-networ)
 2) сделатть зеркальную [сеть](https://superuser.com/questions/1717753/how-to-connect-to-windows-subsystem-for-linux-from-another-machine-within-networ) (не работает на windows 10, работает на windows 11).  Hyper-V Firewall [не работает на windows 10](https://github.com/microsoft/WSL/discussions/11380)
-3) сделать мост между сетями (не заработало). Рабочий вариант с мостом тут (нестабильное решение). Важно, что по итогу в powershell были испольщованф следующие команды
+3) сделать мост между сетями (не заработало). Рабочий вариант с мостом тут (нестабильное решение). Важно, что по итогу в powershell были использованы следующие команды. Вторая команда не нужна
 
+~~~
 Set-VMSwitch -name "WSL" -NetAdapterName "Ethernet" -AllowManagementOS $true
+~~~
 
-Из файлово системы windows есть [доступ](https://superuser.com/questions/1791373/location-of-wsl-home-directory-in-windows) к файловой системе wsl. В адресную строку проводника нужно ввести
+
+Из файловой системы windows есть [доступ](https://superuser.com/questions/1791373/location-of-wsl-home-directory-in-windows) к файловой системе wsl. В адресную строку проводника нужно ввести
 
 ~~~
  \\wsl.localhost\Ubuntu\
