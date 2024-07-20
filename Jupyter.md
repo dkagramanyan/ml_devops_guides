@@ -1,15 +1,28 @@
 ## Jupyter
 
-Добавление нового окружения в jupyter
+Алгоритм настройки jupyter notebook/lab
+
+1) Создается окружение Anaconda/venv
+
+2) В новое окружение устанавливается ядро ipython, на котором работает jupyter
 ~~~
+pip install jupyterlab
 pip install --user ipykernel
+~~~
+
+3) Далее добавить ядро окружения в список ядер jupyter. Не совсем ясно какая за этим стоит логика, но без этой операции jupyter не будет видеть ядра
+   
+~~~
 python -m ipykernel install --user --name=<my_env_name>
 ~~~
 
-Удаление ядра (kernel) из jupyter
+При необходимости можно удалить ядро из jupyter
 ~~~
 jupyter kernelspec uninstall your_env
 ~~~
+
+
+---------
 
 Запуск jupyter в другой директории. Войдите в свойства ярлыка jupyter-> объект -> замените "%USERPROFILE%/" на требуемую директорию. Например
 ~~~
