@@ -25,6 +25,7 @@ WSL
 networkingMode=mirrored
 ~~~
 После этого у машины wsl будет такой же адрес, как у хоста (компьютера windows)
+
 3) Для назначения вебсерверам, находящимся на wsl, адреса хоста [нужно пропиcать в конфиге](https://github.com/microsoft/WSL/issues/11034#issuecomment-1894295548) следующее
 ~~~
 [experimental]
