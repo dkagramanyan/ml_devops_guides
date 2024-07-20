@@ -41,3 +41,20 @@ processors=8
 [experimental]
 hostAddressLoopback=True
 ~~~
+
+## Запуск скриптов из windows в wsl
+
+Для создания .bat скрипта для запуска jupyter server нужно
+1) создать .bat файл следующего содержания
+~~~
+wsl -e bash -c "cd; ./jupyter_start.sh"
+~~~
+
+2) в wsl нужно создать .sh скрипт и внутри написать
+~~~
+source ~/anaconda3/etc/profile.d/conda.sh
+
+conda activate torch
+
+jupyter lab
+~~~
