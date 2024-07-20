@@ -18,4 +18,4 @@ Set-VMSwitch -name "WSL" -NetAdapterName "Ethernet" -AllowManagementOS $true
  \\wsl.localhost\Ubuntu\
 ~~~
 
-Если нужно сбросить настройки сети в wsl, то команды вот тут
+Если нужно сбросить настройки сети в wsl, то команды вот [тут](https://help.nordlayer.com/docs/how-to-reset-network-settings-on-linux)
