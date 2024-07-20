@@ -39,7 +39,7 @@ jupyter lab
 jupyter notebook --generate-config
 ~~~
 
-Созданный окнфиг будет находиться по адресу
+Созданный конфиг будет находиться по адресу (для windows)
 
 ~~~
 /users/{your_user}/.jupyter
