@@ -45,8 +45,10 @@ hostAddressLoopback=True
 ## Запуск скриптов из windows в wsl
 
 Для создания .bat скрипта для запуска jupyter server нужно
-1) создать .bat файл следующего содержания
+1) создать .bat файл следующего содержания. Чтобы предотвратить закрытие консоли после ошибки добавим строчку [отсюда](https://stackoverflow.com/questions/17118846/how-to-prevent-batch-window-from-closing-when-error-occurs)
 ~~~
+@echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 wsl -e bash -c "cd; ./jupyter_start.sh"
 ~~~
 
