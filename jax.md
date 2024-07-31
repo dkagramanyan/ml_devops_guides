@@ -10,12 +10,12 @@ jax.devices()
 
 jax + tqdm
 
+~~~
 import jax
 import jax.numpy as jnp
 from jax import lax
 import time
 
-~~~
 # Initialize the progress bar
 total_iterations=10000
 progress_bar = tqdm(total=total_iterations)
