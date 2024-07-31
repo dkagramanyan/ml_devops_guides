@@ -15,6 +15,7 @@ import jax
 import jax.numpy as jnp
 from jax import lax
 import time
+from tqdm.notebook import tqdm
 
 # Initialize the progress bar
 total_iterations=10000
