@@ -51,3 +51,7 @@ ValueError: mutable default <class 'jaxlib.xla_extension.ArrayImpl'> for field p
 ~~~
 
 то проблема не в библиотеке, а в версии 3.11 python ( [пруф1](https://github.com/huggingface/datasets/issues/5230), [пруф2](https://github.com/ray-project/ray/issues/33232)). Достаточно создать новое окружение с python 3.10 и все нормально заведется
+
+# Mac m1
+
+Установка jax требует установки Metal. Если вылезает ошибка инициализации плагина, но нужно использовать другие [версии библиотек](https://github.com/google/jax/issues/21383)
