@@ -60,3 +60,19 @@ conda activate torch
 
 jupyter lab
 ~~~
+
+## Перенос WSL на другой диск
+
+Для переноса есть хороший короткий гайд на [форуме](https://superuser.com/questions/1550622/move-wsl2-file-system-to-another-drive/1618643#1618643)
+
+После переноса нужно обязательно назначить пользователя wsl по умолчанию
+
+~~~
+ubuntu config --default-user YourUsername
+~~~
+
+После нужно сделать версию wsl по умолчанию в системе
+
+~~~
+wsl --set-default Ubuntu
+~~~
