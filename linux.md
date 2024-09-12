@@ -13,3 +13,13 @@ Tmux
 7) CTRL+A затем CTRL+N - переключится на следующее окно
 8) CTRL+D - закрыть шелл, закрыть окно / сплит
 9) CTRL+A затем  CTRL+Z - зум текущего окна
+
+
+Anaconda
+-------
+
+Если при установке анаконды терминал все равно пишет, что "conda: command not found", то нужно в консоли [экспортнуть](https://saturncloud.io/blog/understanding-the-export-path-command-a-deep-dive-into-export-pathanaconda3binpath/) путь анаконды в .bashrc
+
+~~~
+export PATH=~/anaconda3/bin:$PATH
+~~~
