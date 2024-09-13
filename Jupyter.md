@@ -59,7 +59,7 @@ jupyter notebook --generate-config
 2) Поставим пароль. Для этого генерируем скриптом хэш пароля и вносим его в конфиг сервера [guide](https://stackoverflow.com/questions/66063686/set-jupyter-lab-password-encrypted-with-sha-256)
 
 ~~~
-from notebook.auth import passwd
+from jupyter_server.auth import passwd
 my_password = "spam-and-eggs"
 hashed_password = passwd(passphrase=my_password, algorithm='sha256')
 print(hashed_password)
