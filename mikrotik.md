@@ -1,5 +1,8 @@
 # Mikrotik
 
+Настройка NAT: Hairpin
+----------------------
+
 Если у вас есть белвый ip, то вы можете настроить проброс портов и работать в jupyter сервером удаленно. Важно!
 Обязательно нужно использовать SSL сертификат
 
@@ -22,6 +25,22 @@ to-addresses=192.168.88.53 to-port=8888
 add action=masquerade chain=srcnat dst-address=192.168.88.53 dst-port=8888 protocol=tcp \
 src-address=192.168.88.0/24
 ~~~
+
+Проброс портов для SSH
+----------------------
+
+Для проброса порта нужно создать в FireWall новое [правило](https://forum.mikrotik.com/viewtopic.php?t=136405). Важно! С этим правилом можно присоединиться из вне локальной сети машины. Если попытаться подключаться в ее локальной сети, то подлюкчения не будет
+
+~~~
+/ip firewall nat
+add action=dst-nat chain=dstnat dst-port=1234 protocol=tcp to-addresses=192.168.88.53 to-ports=22
+~~~
+
+Для решения проблемы нужно:
+~~~
+find sollution
+~~~
+
 
 
 
