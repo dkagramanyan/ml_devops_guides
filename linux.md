@@ -23,3 +23,11 @@ Anaconda
 ~~~
 export PATH=~/anaconda3/bin:$PATH
 ~~~
+
+Запуск задач на фоне
+--------------------
+
+Для запуска процессов на фоне можно исопльщовать команду [nohup](https://phoenixnap.com/kb/linux-run-command-background):
+~~~
+nohup jupyter lab &
+~~~
