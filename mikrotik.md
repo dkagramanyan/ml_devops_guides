@@ -36,7 +36,7 @@ src-address=192.168.88.0/24
 add action=dst-nat chain=dstnat dst-port=1234 protocol=tcp to-addresses=192.168.88.53 to-ports=22
 ~~~
 
-Для решения проблемы нужно:
+Для решения проблемы нужно взять правило из второй части [гайд](https://spw.ru/educate/articles/natpart5/):
 ~~~
 find sollution
 ~~~
