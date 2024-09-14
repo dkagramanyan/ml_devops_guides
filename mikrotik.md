@@ -30,7 +30,6 @@ src-address=192.168.88.0/24
 ----------------------
 
 Для проброса порта нужно создать в FireWall новое [правило](https://forum.mikrotik.com/viewtopic.php?t=136405). Важно! С этим правилом можно присоединиться из вне локальной сети машины. Если попытаться подключаться в ее локальной сети, то подлюкчения не будет
-
 ~~~
 /ip firewall nat
 add action=dst-nat chain=dstnat dst-port=1234 protocol=tcp to-addresses=192.168.88.53 to-ports=22
@@ -38,9 +37,8 @@ add action=dst-nat chain=dstnat dst-port=1234 protocol=tcp to-addresses=192.168.
 
 Для решения проблемы нужно взять правило из второй части [гайда](https://spw.ru/educate/articles/natpart5/):
 ~~~
-find sollution
+add action=masquerade chain=srcnat dst-address=192.168.88.53 dst-port=1234 protocol=tcp \
+src-address=192.168.88.0/24
 ~~~
-
-
 
 
