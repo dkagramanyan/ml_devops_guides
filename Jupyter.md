@@ -95,3 +95,10 @@ jupyter lab
 # c.ServerApp.certfile = ''
 # c.ServerApp.keyfile = ''
 ~~~
+
+Docker
+-----
+
+~~~
+docker run  -d --rm -p 12345:12345  -v "/mnt/c/jupyter_sertificates:/jupyter_sertificates" -v "$(pwd):/home/jovyan/work"  quay.io/jupyter/base-notebook start-notebook.py  --NotebookApp.token='some_token'  --NotebookApp.port='9999'  --NotebookApp.certfile='/jupyter_sertificates/certificate.txt'  --NotebookApp.keyfile='/jupyter_sertificates/private_key.txt'
+~~~
