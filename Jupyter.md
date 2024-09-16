@@ -102,3 +102,8 @@ Docker
 ~~~
 docker run  -d --rm -p 12345:12345  -v "/mnt/c/jupyter_sertificates:/jupyter_sertificates" -v "$(pwd):/home/jovyan/work"  quay.io/jupyter/base-notebook start-notebook.py  --NotebookApp.token='some_token'  --NotebookApp.port='12345'  --NotebookApp.certfile='/jupyter_sertificates/certificate.txt'  --NotebookApp.keyfile='/jupyter_sertificates/private_key.txt'
 ~~~
+
+JupyterHub
+---------
+
+При обычном запуске jupyterHub через команду, могут возникнуть ошибки из-за того, что [не хватает прав](https://discourse.jupyter.org/t/starting-server-for-non-default-users-in-jupyterhub-500-internal-server-error/21518). [Решается запуском юпитерхаба в докере](https://discourse.jupyter.org/t/starting-server-for-non-default-users-in-jupyterhub-500-internal-server-error/21518) 
