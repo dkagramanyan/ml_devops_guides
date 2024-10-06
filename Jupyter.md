@@ -99,8 +99,22 @@ jupyter lab
 Docker
 -----
 
+Юпитерлаб можно запусти ть в докере, список готовых образов [тут](https://quay.io/organization/jupyter). 
+
 ~~~
-docker run  -d --rm -p 12345:12345  -v "/mnt/c/jupyter_sertificates:/jupyter_sertificates" -v "$(pwd):/home/jovyan/work"  quay.io/jupyter/base-notebook start-notebook.py  --NotebookApp.token='some_token'  --NotebookApp.port='12345'  --NotebookApp.certfile='/jupyter_sertificates/certificate.txt'  --NotebookApp.keyfile='/jupyter_sertificates/private_key.txt'
+sudo docker run \
+  -d \
+  --rm \
+  -p 12345:9999 \
+  -v "/mnt/c/jupyter_sertificates:/jupyter_sertificates" \
+  -v "$(pwd):/home/jovyan/work" \
+  --gpus=all \
+  quay.io/jupyter/pytorch-notebook:cuda12-pytorch-2.4.1 \
+  start-notebook.py \
+  --NotebookApp.token='some_token' \
+  --NotebookApp.port='12345' \
+  --NotebookApp.certfile='/jupyter_sertificates/certificate.txt' \
+  --NotebookApp.keyfile='/jupyter_sertificates/private_key.txt'
 ~~~
 
 JupyterHub
