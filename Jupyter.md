@@ -114,7 +114,7 @@ docker run \
   quay.io/jupyter/pytorch-notebook:cuda12-pytorch-2.4.1 \
   start-notebook.py \
   --NotebookApp.token='some_token' \
-  --NotebookApp.port='9999' \
+  --NotebookApp.port='12345' \
   --NotebookApp.certfile='/jupyter_sertificates/certificate.txt' \
   --NotebookApp.keyfile='/jupyter_sertificates/private_key.txt'
 ~~~
