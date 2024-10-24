@@ -24,7 +24,7 @@ Anaconda
 export PATH=~/anaconda3/bin:$PATH
 ~~~
 
-Для mac os проблема решается так же. Возможное решкение описано  [тут](https://stackoverflow.com/questions/35029029/jupyter-notebook-command-does-not-work-on-mac)
+Для mac os проблема решается так же. Возможное решение описано  [тут](https://stackoverflow.com/questions/35029029/jupyter-notebook-command-does-not-work-on-mac)
 
 
 Запуск задач на фоне
