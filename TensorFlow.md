@@ -1,4 +1,5 @@
-## TensorFlow
+TensorFlow
+----------
 
 [Таблица](https://www.tensorflow.org/install/source#gpu) совместимости версий tensroflow 
 и CUDA
@@ -34,3 +35,7 @@ print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 gpus = tf.config.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(gpus[0], True)
 ~~~
+
+## Apple silicon
+
+Установка хорошо описана [тут](https://jamescalam.medium.com/hugging-face-and-sentence-transformers-on-m1-macs-4b12e40c21ce) 
