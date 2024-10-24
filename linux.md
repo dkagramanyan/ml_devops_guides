@@ -24,10 +24,13 @@ Anaconda
 export PATH=~/anaconda3/bin:$PATH
 ~~~
 
+Для mac os проблема решается так же. Возможное решкение описано  [тут](https://stackoverflow.com/questions/35029029/jupyter-notebook-command-does-not-work-on-mac)
+
+
 Запуск задач на фоне
 --------------------
 
-Для запуска процессов на фоне можно исопльщовать команду [nohup](https://phoenixnap.com/kb/linux-run-command-background):
+Для запуска процессов на фоне можно использовать команду [nohup](https://phoenixnap.com/kb/linux-run-command-background):
 ~~~
 nohup jupyter lab &
 ~~~
