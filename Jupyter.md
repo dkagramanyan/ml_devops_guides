@@ -108,15 +108,17 @@ docker run \
   -p 12345:12345 \
   --user root \
   -e GRANT_SUDO=yes\
-  -v "/mnt/c/jupyter_sertificates:/jupyter_sertificates" \
+  -v "/mnt/c/ssl_certificates:/ssl_certificates" \
   -v "$(pwd)/rag/:/home/jovyan/work" \
   --gpus=all \
   quay.io/jupyter/pytorch-notebook:cuda12-pytorch-2.4.1 \
   start-notebook.py \
-  --NotebookApp.token='some_token' \
+  --NotebookApp.token='token' \
   --NotebookApp.port='12345' \
-  --NotebookApp.certfile='/jupyter_sertificates/certificate.txt' \
-  --NotebookApp.keyfile='/jupyter_sertificates/private_key.txt'
+  --NotebookApp.certfile='/ssl_certificates/certificate.txt' \
+  --NotebookApp.keyfile='/ssl_certificates/private_key.txt'
+
+  -v "$(pwd)/anaconda3/:$(pwd)/anaconda3" \
 ~~~
 
 JupyterHub
