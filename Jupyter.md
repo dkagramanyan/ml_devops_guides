@@ -36,7 +36,7 @@ jupyter lab
 Для настройки рекумендуется предварительно создать конфиг-файл для юпитера. Это делается командой
 
 ~~~
-jupyter notebook --generate-config
+jupyter lab --generate-config
 ~~~
 
 Созданный конфиг будет находиться по адресу (для windows)
