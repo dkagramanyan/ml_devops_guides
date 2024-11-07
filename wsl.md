@@ -58,6 +58,14 @@ conda activate torch
 jupyter lab
 ~~~
 
+## Запуск сложных скриптов из windows в wsl
+
+~~~
+res=subprocess.run('wsl -e bash -c "echo $(($(getconf _PHYS_PAGES) * $(getconf PAGE_SIZE) / (1024 * 1024)))" ', capture_output=True)
+res=subprocess.run(['wsl', '-e', 'bash', '-c', 'ps -eo rss | awk \'{sum+=$1} END {print sum/1024}\''], capture_output=True, text=True)
+
+~~~
+
 ## Перенос WSL на другой диск
 
 Для переноса есть хороший короткий гайд на [форуме](https://superuser.com/questions/1550622/move-wsl2-file-system-to-another-drive/1618643#1618643)
