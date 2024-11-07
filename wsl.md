@@ -80,3 +80,12 @@ wsl --set-default Ubuntu
 ~~~
  \\wsl.localhost\Ubuntu\
 ~~~
+
+## Автостарт WSL при включении windows
+
+Для автостарта нужно создать батник и скачать программу [nircmd](https://www.nirsoft.net/utils/nircmd.html). Решение взято [отсюда](https://www.reddit.com/r/bashonubuntuonwindows/comments/1716np4/start_wsl_on_boot_without_login/).
+Затем батник нужно положить в папку автостарт в windows
+
+~~~
+@start /b H:\nircmd.exe execmd wsl ~
+~~~
