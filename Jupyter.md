@@ -113,7 +113,7 @@ docker run \
   --gpus=all \
   quay.io/jupyter/pytorch-notebook:cuda12-pytorch-2.4.1 \
   start-notebook.py \
-  --NotebookApp.token='8PVzAM1ZaSIY6FZ1cZEe5gqH2t3yuhs13OOlZeQyRtjQxheW6JbgVOgP483' \
+  --NotebookApp.token='token' \
   --NotebookApp.port='9999' \
   --NotebookApp.certfile='/ssl_certificates/certificate.crt' \
   --NotebookApp.keyfile='/ssl_certificates/certificate.key'
