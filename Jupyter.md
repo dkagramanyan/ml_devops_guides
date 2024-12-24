@@ -1,6 +1,6 @@
-## Jupyter
+# Jupyter
 
-### Базовая настройка jupyter notebook/lab
+## Базовая настройка jupyter notebook/lab
 
 1) Создается окружение Anaconda/venv
 
@@ -31,7 +31,7 @@ jupyter lab
 
 -----------
 
-### Полная настройка
+## Полная настройка
 
 Для настройки рекумендуется предварительно создать конфиг-файл для юпитера. Это делается командой
 
@@ -96,7 +96,7 @@ jupyter lab
 # c.ServerApp.keyfile = ''
 ~~~
 
-Docker
+## Docker
 -----
 
 Юпитерлаб можно запусти ть в докере, список готовых образов [тут](https://quay.io/organization/jupyter). Параметры запуска описаны в [документации](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html)
@@ -119,7 +119,12 @@ docker run \
   --NotebookApp.keyfile='/ssl_certificates/certificate.key'
 ~~~
 
-JupyterHub
----------
+# JupyterHub
 
 При обычном запуске jupyterHub через команду, могут возникнуть ошибки из-за того, что [не хватает прав](https://discourse.jupyter.org/t/starting-server-for-non-default-users-in-jupyterhub-500-internal-server-error/21518). [Решается запуском юпитерхаба в докере](https://discourse.jupyter.org/t/starting-server-for-non-default-users-in-jupyterhub-500-internal-server-error/21518) 
+
+Для запуска jupyterHub в докере в есть официальный пример [ссылка](https://github.com/jupyterhub/jupyterhub-deploy-docker/tree/main), в котором нужно под себя настроить docker-composee.yml. Это оказалось не такой простой задачей, которая по итогу не была доведена до конца
+
+# The Littliest Jupyterhub
+
+Версия jupyterHub c более простой и интуитивной [установкой](https://tljh.jupyter.org/en/latest/install/custom-server.html). На момент написания TLJH нет на ubuntu 24. При попытке ее установки сыпятся ошибки 
