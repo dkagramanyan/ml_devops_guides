@@ -23,3 +23,4 @@
 21) msi afterburner
 22) hwmonitor
 23) nircmd.exe
+24) winscp
