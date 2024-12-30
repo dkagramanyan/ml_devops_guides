@@ -22,3 +22,4 @@
 20) peaZip
 21) msi afterburner
 22) hwmonitor
+23) nircmd.exe
