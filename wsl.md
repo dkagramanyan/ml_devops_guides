@@ -123,6 +123,10 @@ wsl --import-in-place <distro-name> <path-to-vhdx>
 wsl --unregister <distro-name>
 ```
 
+## WSL Manager
+
+[Инструмент](https://github.com/bostrot/wsl2-distro-manager) для управления более одним wsl дистрибутивом. Для использования этого менеджера нужно скачать исходный код с страницы релиза и затем сбилдить его при помощи [flutter](https://docs.flutter.dev/get-started/install)
+
 ## Решение ошибок
 
 ### Ошибка 
