@@ -122,3 +122,27 @@ wsl --import-in-place <distro-name> <path-to-vhdx>
 ```
 wsl --unregister <distro-name>
 ```
+
+## Решение ошибок
+
+### Ошибка 
+
+Ошибка ниже решается включением systemd в дистрибутиве wsl. Ошибка описана [тут](https://askubuntu.com/questions/1379425/system-has-not-been-booted-with-systemd-as-init-system-pid-1-cant-operate)
+```
+System has not been booted with systemd as init system (PID 1). Can't operate.
+
+Failed to connect to bus: Host is down Failed to talk to init daemon.
+```
+
+Для решения нужно в в файле wsl.conf  
+```
+sudo -e /etc/wsl.conf
+```
+
+написать строки ниже
+```
+[boot]
+systemd=true
+```
+
+
