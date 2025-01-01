@@ -101,7 +101,8 @@ wsl --set-default Ubuntu
 Затем батник нужно положить в папку автостарт в windows
 
 ~~~
-@start /b H:\nircmd.exe execmd wsl ~
+@start /b X:\nircmd.exe execmd wsl -d ubuntu22
+@start /b X:\nircmd.exe execmd wsl -d ubuntu24
 ~~~
 
 ## Работа с .vhdx файлом WSL
