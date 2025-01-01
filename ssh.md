@@ -18,7 +18,7 @@ KbdInteractiveAuthentication yes
 
 ## Ошибка 2
 
-Если не устанавливается openssh-server. Описано [тут](https://askubuntu.com/questions/265982/unable-to-start-sshd)
+Если не устанавливается openssh-server. Описано [тут](https://askubuntu.com/questions/265982/unable-to-start-sshd) и [тут](https://askubuntu.com/questions/603493/apt-get-dependency-issue-open-ssh-client)
 ```
 sudo apt-get purge openssh-server
 sudo apt-get install openssh-server
