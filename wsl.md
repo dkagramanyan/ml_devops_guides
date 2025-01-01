@@ -33,11 +33,16 @@ hostAddressLoopback=True
 ~~~
 [wsl2]
 networkingMode=mirrored
-memory=30GB
-processors=8
+memory=31GB
 [experimental]
 hostAddressLoopback=True
 ~~~
+
+4) В консоли powershell вводите команду из официального [гайда](https://learn.microsoft.com/en-us/windows/wsl/networking). Важно! Без этой команды Firewall Hyper-V не разрешит внешние подключения к wsl
+
+```
+Set-NetFirewallHyperVVMSetting -Name '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -DefaultInboundAction Allow
+```
 
 ## Запуск скриптов из windows в wsl
 
