@@ -32,6 +32,7 @@ hostAddressLoopback=True
 по итогу конфиг выглядит так
 ~~~
 [wsl2]
+autoMemoryReclaim = gradual
 networkingMode=mirrored
 memory=31GB
 [experimental]
