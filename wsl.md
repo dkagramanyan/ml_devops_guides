@@ -32,11 +32,11 @@ hostAddressLoopback=True
 по итогу конфиг выглядит так
 ~~~
 [wsl2]
-autoMemoryReclaim = gradual
 networkingMode=mirrored
-memory=31GB
+memory=29GB
 [experimental]
 hostAddressLoopback=True
+autoMemoryReclaim=gradual
 ~~~
 
 4) В консоли powershell вводите команду из официального [гайда](https://learn.microsoft.com/en-us/windows/wsl/networking). Важно! Без этой команды Firewall Hyper-V не разрешит внешние подключения к wsl
