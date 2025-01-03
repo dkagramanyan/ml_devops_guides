@@ -119,6 +119,11 @@ docker run \
   --NotebookApp.keyfile='/ssl_certificates/certificate.key'
 ~~~
 
+Jupyterlab возвращает ошибку **Permissions error** при попытке создат ьфайл, то нужно от имени рута в контейрере прописать
+```
+sudo chmod -R 777 /path/to/mounted/directory
+```
+
 # JupyterHub
 
 При обычном запуске jupyterHub через команду, могут возникнуть ошибки из-за того, что [не хватает прав](https://discourse.jupyter.org/t/starting-server-for-non-default-users-in-jupyterhub-500-internal-server-error/21518). [Решается запуском юпитерхаба в докере](https://discourse.jupyter.org/t/starting-server-for-non-default-users-in-jupyterhub-500-internal-server-error/21518) 
