@@ -18,3 +18,7 @@ The following signatures couldn't be verified because the public
 ```
 
 Решается скачиванием GPG ключа с сайта докера. Описано [тут](https://stackoverflow.com/a/69986013)
+
+# Создание кастомного образа
+
+Можно взять докерфайл из оригинального [репозитория](https://github.com/jupyter/docker-stacks/tree/main/images/pytorch-notebook) jupyterlab и добавить в него ssh сервер, но у меня не вышло
