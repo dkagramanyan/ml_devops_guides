@@ -130,6 +130,13 @@ sudo chmod -R 777 /path/to/mounted/directory
 
 Для запуска jupyterHub в докере в есть официальный пример [ссылка](https://github.com/jupyterhub/jupyterhub-deploy-docker/tree/main), в котором нужно под себя настроить docker-composee.yml. Это оказалось не такой простой задачей, которая по итогу не была доведена до конца
 
+У Jupyterhub есть возможность через токен создать ссылку вида https://<your-hub-url>/jh/user/<your-hub-user-name>/?token=<your-token> [пример](https://cloud.vk.com/docs/ml/mlplatform/jupyterhub/how-to-guides/vscode), но повоторить этот опыт с JH без докера не вышло
+
+## Особенности работы
+
+1) jupyterhub не запускается на 443 порте
+2) github oauth не работает на 443 порте с недефолтым значением  c.JupyterHub.base_url
+
 # The Littliest Jupyterhub
 
 Версия jupyterHub c более простой и интуитивной [установкой](https://tljh.jupyter.org/en/latest/install/custom-server.html). На момент написания TLJH нет на ubuntu 24. При попытке ее установки сыпятся ошибки 
