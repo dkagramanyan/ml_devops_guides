@@ -16,6 +16,14 @@ conda install -c anaconda cudatoolkit=10.1
 
 У Nvidia есть для каждой версии cuda набор скриптов для установки. [Ссылка](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=24.04&target_type=deb_local)
 
+или можно установить через
+```
+sudo apt install nvidia-driver-550
+```
+или
+```
+sudo apt install nvidia-cuda-toolkit
+```
 
 ### Глобальная установка в PATH
 **для windows**
