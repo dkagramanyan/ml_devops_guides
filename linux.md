@@ -22,3 +22,19 @@ Tmux
 ~~~
 nohup jupyter lab &
 ~~~
+
+OpenVPN
+-------
+
+Для настройки нужно следовать инструкциям на официальном сайте. После нужно создать конфиг с галочкой о шифровании
+
+```
+sudo docker run -d \
+  --device /dev/net/tun \
+  --cap-add=MKNOD --cap-add=NET_ADMIN \
+  --pull always \
+  -p 943:943 -p 443:443 -p 1194:1194/udp \
+  -v ovpn_data:/openvpn \
+  --restart=unless-stopped \
+  openvpn/openvpn-as
+```
