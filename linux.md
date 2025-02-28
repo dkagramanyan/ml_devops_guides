@@ -39,6 +39,13 @@ sudo docker run -d \
   openvpn/openvpn-as
 ```
 
+Kuma alerts
+----------
+
+```
+docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
+```
+
 Прочее
 ------
 
