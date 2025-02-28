@@ -38,3 +38,8 @@ sudo docker run -d \
   --restart=unless-stopped \
   openvpn/openvpn-as
 ```
+
+Прочее
+------
+
+1) запуск задач по таймеру [cronlab](https://askubuntu.com/questions/13730/how-can-i-schedule-a-nightly-reboot)
