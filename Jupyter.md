@@ -121,7 +121,7 @@ docker run \
 
 Jupyterlab возвращает ошибку **Permissions error** при попытке создат ьфайл, то нужно от имени рута в контейрере прописать
 ```
-sudo chmod -R 777 /path/to/mounted/directory
+sudo chmod -R 777 ./work
 ```
 
 # JupyterHub
