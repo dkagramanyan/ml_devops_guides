@@ -46,6 +46,24 @@ Kuma alerts
 docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
 ```
 
+## Монтирование дисков
+
+Если диски были изначально созданы в windiws и при каждом запуске ubuntu нужно их монтировать руками, то есть [решение](https://askubuntu.com/questions/966706/17-10-how-to-auto-mount-drives-on-startup)
+
+```
+sudo blkid # определяем UUID дисков
+```
+
+В конфе файла /etc/fstab добавляем строки
+
+```
+UUID=B4BE2F86BE2F3FEA /media/david/work_ssd_0.5 ntfs defaults 0 0
+UUID=14A25E84A25E6A6E /media/david/storage_hard_1 ntfs defaults 0 0
+UUID=70F6C51AF6C4E208 /media/david/work_ssd_2_sata ntfs defaults 0 0
+UUID=8AC6984BC6983A01 /media/david/storage_hard_2 ntfs defaults 0 0
+```
+
+
 Прочее
 ------
 
