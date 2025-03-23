@@ -71,3 +71,4 @@ UUID=8AC6984BC6983A01 /media/david/storage_hard_2 ntfs defaults 0 0
 
 1) запуск задач по таймеру [cronlab](https://askubuntu.com/questions/13730/how-can-i-schedule-a-nightly-reboot)
 2) настройка [XRDP](https://serverspace.ru/support/help/how-to-xrdp-ubuntu-20.04/?utm_source=google.com&utm_medium=organic&utm_campaign=google.com&utm_referrer=google.com)
+3) если при подключении по XRDP вылезает *system policy prevents wifi scans*, то вот [решение](https://unix.stackexchange.com/questions/782724/newbie-system-policy-prevents-wi-fi-scans)
