@@ -30,6 +30,7 @@ OpenVPN
 
 ```
 sudo docker run -d \
+  --name=openvpn \
   --device /dev/net/tun \
   --cap-add=MKNOD --cap-add=NET_ADMIN \
   --pull always \
@@ -37,6 +38,10 @@ sudo docker run -d \
   -v ovpn_data:/openvpn \
   --restart=unless-stopped \
   openvpn/openvpn-as
+```
+
+```
+sudo docker run openvpn
 ```
 
 Kuma alerts
