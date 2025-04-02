@@ -23,3 +23,11 @@ KbdInteractiveAuthentication yes
 sudo apt-get purge openssh-server
 sudo apt-get install openssh-server
 ```
+
+
+## Настройка ключа для подключения к машине ubuntu по ssh
+
+```
+ssh-keygen
+ssh-copy-id -i .ssh/id_ed25519.pub david@homepc
+```
