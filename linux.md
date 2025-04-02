@@ -69,7 +69,8 @@ UUID=8AC6984BC6983A01 /media/david/storage_hard_2 ntfs defaults 0 0
 ```
 
 
-
+## Темы для терминала zsh
+1) [oh-my-zash](https://dev.to/dinhkhai0201/how-to-install-oh-my-zsh-and-zsh-autosuggestions-for-macbook-3f07)
 
 Прочее
 ------
