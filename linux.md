@@ -72,6 +72,30 @@ UUID=8AC6984BC6983A01 /media/david/storage_hard_2 ntfs defaults 0 0
 ## Темы для терминала zsh
 1) [oh-my-zash](https://dev.to/dinhkhai0201/how-to-install-oh-my-zsh-and-zsh-autosuggestions-for-macbook-3f07)
 
+## Наполнение файла .zshrc
+
+```
+# homebrew do not delete
+export PATH=/opt/homebrew/bin:$PATH
+
+export PATH=$HOME/anaconda3/bin:$PATH
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+```
+
 Прочее
 ------
 
