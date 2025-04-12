@@ -23,6 +23,11 @@ Tmux
 nohup jupyter lab &
 ~~~
 
+Поиск nohup задач
+```
+jobs -l
+```
+
 OpenVPN
 -------
 
