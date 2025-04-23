@@ -32,7 +32,7 @@ Label-studio
 ------------
 
 ```
-sudo docker run -it -d -p 8080:8080 -v $(pwd)/mydata:/label-studio/data heartexlabs/label-studio:latest
+sudo docker run -it -d -p 8080:8080 -v $(pwd)/mydata:/label-studio/data --restart unless-stopped  heartexlabs/label-studio:latest
 ```
 
 OpenVPN
