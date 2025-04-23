@@ -28,6 +28,13 @@ nohup jupyter lab &
 jobs -l
 ```
 
+Label-studio
+------------
+
+```
+sudo docker run -it -d -p 8080:8080 -v $(pwd)/mydata:/label-studio/data heartexlabs/label-studio:latest
+```
+
 OpenVPN
 -------
 
