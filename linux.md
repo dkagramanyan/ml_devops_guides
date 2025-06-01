@@ -113,6 +113,16 @@ unset __conda_setup
 На ресурсе [linux server io ](https://docs.linuxserver.io/images/docker-obsidian/) много приложений в контейнерах, запущенные через [KasmVNC](https://www.kasmweb.com/kasmvnc). Для некоторых ресурсоемких приложений (например, obsidian), может
 потребоваться дополнительная настройка отображения картинки. По умолчанию может быть задержка и низкое разрешение
 
+## Выключение блокировки экрана и выхода из аккаунта ubuntu
+
+```
+# If you don’t actually need the screen to lock after idling, you can simply turn off Gnome’s lock:
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+
+# To also prevent the “blank‐screen” (so it never even goes to a blank screen), you can disable the idle‐blank:
+gsettings set org.gnome.desktop.session idle-delay 0
+```
+
 Прочее
 ------
 
