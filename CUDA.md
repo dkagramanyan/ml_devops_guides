@@ -12,7 +12,9 @@ activate env
 conda install -c anaconda cudatoolkit=10.1
 ~~~
 
-## Установка на Ubuntu
+## Ubuntu
+
+### Установка 
 
 У Nvidia есть для каждой версии cuda набор скриптов для установки. [Ссылка](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=24.04&target_type=deb_local)
 
@@ -25,10 +27,18 @@ sudo apt install nvidia-driver-550
 sudo apt install nvidia-cuda-toolkit
 ```
 
-### Глобальная установка в PATH
-**для windows**
+### Удаление
+Описано [тут](https://stackoverflow.com/questions/56431461/how-to-remove-cuda-completely-from-ubuntu), и [тут](https://forums.developer.nvidia.com/t/nvidia-smi-has-failed-because-it-couldnt-communicate-with-the-nvidia-driver-make-sure-that-the-latest-nvidia-driver-is-installed-and-running/197141/5)
+```
+sudo apt-get remove --purge '^nvidia-.*' '^libnvidia-.*' '^cuda-.*' 'nsight*' '*cublas*'
+sudo apt-get install linux-headers-$(uname -r)
+sudo apt autoremove
+```
 
-Более трудоемкий способ установки. Позволяет использовать только одну 
+## Windows 
+### Глобальная установка в PATH
+
+Трудоемкий способ установки. Позволяет использовать только одну 
 установленную версию CUDA.
 Если вы не работаете с пакетом Anaconda или область видимости CUDA должна 
 быть глобальной, выполните следующие действия
