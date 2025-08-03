@@ -14,6 +14,11 @@ conda install -c anaconda cudatoolkit=10.1
 
 ## Ubuntu
 
+### Простая утсановка
+
+Автоматическая простая установка  [тут](https://askubuntu.com/questions/1258904/how-do-i-know-which-nvidia-driver-i-need)
+
+
 ### Установка 
 
 У Nvidia есть для каждой версии cuda набор скриптов для установки. [Ссылка](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=24.04&target_type=deb_local)
