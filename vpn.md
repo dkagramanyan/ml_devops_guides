@@ -44,3 +44,12 @@ ssh root@192.168.1.1
 api.github.com
 api.individual.githubcopilot.com
 ```
+
+## Anydeks
+
+Автостарт anydesk при запуске ubuntu
+
+```
+sudo systemctl enable anydesk.service
+sudo systemctl status anydesk.service
+```
