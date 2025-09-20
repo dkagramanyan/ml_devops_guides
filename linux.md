@@ -15,6 +15,12 @@ Tmux
 9) CTRL+A затем  CTRL+Z - зум текущего окна
 
 
+## XRDP для ubuntu
+
+[Гайд](https://reg.cloud/support/cloud/oblachnyye-servery/ustanovka-programmnogo-obespecheniya/kak-podklyuchitsya-k-ubuntu-iz-windows-s-pomoshchyu-rdp#2) по удаленному подключению к убунте через rdp. 
+
+Важно! **Не нужно** устанавливать графическое окружение Xfce. 
+
 Запуск задач на фоне
 --------------------
 
