@@ -1,5 +1,7 @@
 # List of apps
 
+## Windows
+
 1) Plex
 2) rufus
 3) notepad++
@@ -24,3 +26,11 @@
 22) hwmonitor
 23) nircmd.exe
 24) winscp
+
+## Ubuntu
+
+1) netdata
+2) docker
+3) [CoolerControl](https://gitlab.com/coolercontrol/coolercontrol)
+4) [GKraken](https://gitlab.com/leinardi/gkraken)
+5) KVM 

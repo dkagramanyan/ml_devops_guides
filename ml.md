@@ -50,6 +50,10 @@ tf.config.experimental.set_memory_growth(gpus[0], True)
 
 Установка хорошо описана [тут](https://jamescalam.medium.com/hugging-face-and-sentence-transformers-on-m1-macs-4b12e40c21ce) 
 
+При попытке установить tensorflow может возникнуть проблема, что анаконда не может найти нужный пакет. Это связано с тем, что
+при установке была выбрана [версия для х86](https://stackoverflow.com/questions/70562033/tensorflow-deps-packagesnotfounderror), которая будет запускаться через rosetta. Решение - переустановить anaconda
+
+
 
 ## Pytorch
 

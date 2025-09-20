@@ -2,7 +2,6 @@
 --------------
 
 ### Локальная установка в окружение
-**для windows и linux**
 
 Предпочтительный метод установки CUDA для работы на python. Установка  в окружение
 позволяет использовать одновременно несколько версий CUDA. Подробно установка описана [тут](https://towardsdatascience.com/setting-up-tensorflow-gpu-with-cuda-and-anaconda-onwindows-2ee9c39b5c44)
@@ -14,7 +13,7 @@ conda install -c anaconda cudatoolkit=10.1
 
 ## Ubuntu
 
-### Простая утсановка
+### Простая ecnfyjdrf
 
 Автоматическая простая установка  [тут](https://askubuntu.com/questions/1258904/how-do-i-know-which-nvidia-driver-i-need)
 

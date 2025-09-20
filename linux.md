@@ -142,6 +142,10 @@ gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.session idle-delay 0
 ```
 
+## Виртуализация KVM
+
+[Гайд](https://trueconf.ru/blog/baza-znaniy/nastroyka-gipervizora-kvm-na-ubuntu-server?utm_source=google.com&utm_medium=organic&utm_campaign=google.com&utm_referrer=google.com) по установке и запуску ВМ 
+
 Прочее
 ------
 
