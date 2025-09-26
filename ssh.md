@@ -31,3 +31,15 @@ sudo apt-get install openssh-server
 ssh-keygen
 ssh-copy-id -i .ssh/id_ed25519.pub david@homepc
 ```
+
+Если после добавления ключа терминал все равно требует ввод пароля, то проверьте доступ к папка
+```
+# 1) Ownership must be yours
+sudo chown -R david:david /home/david
+
+# 2) Tighten perms on home, .ssh, and authorized_keys
+sudo chmod 755 /home                   # typical default
+sudo chmod 750 /home/david             # or 755 is also fine; must NOT be group-writable
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
