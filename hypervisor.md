@@ -55,6 +55,8 @@ EOF
 
 # 6) Update
 apt update
-
-
 ```
+
+# Raid
+
+[хороший гайд](https://sidmid.ru/программный-raid/)
