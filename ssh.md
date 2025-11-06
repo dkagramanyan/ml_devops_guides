@@ -43,3 +43,5 @@ sudo chmod 750 /home/david             # or 755 is also fine; must NOT be group-
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 ```
+
+Если при передаче файла через ftp возникает ошибка, убедитесь, что в названии файла нет кириллицы
