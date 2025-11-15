@@ -99,11 +99,11 @@ sudo blkid # определяем UUID дисков
 В конфе файла /etc/fstab добавляем строки
 
 ```
-UUID=B4BE2F86BE2F3FEA /home/david/mnt/ssd_0.5_nvme ntfs-3g defaults 0 2
-UUID=70F6C51AF6C4E208 /home/david/mnt/ssd_2_sata ntfs-3g defaults 0 2
+UUID=B4BE2F86BE2F3FEA /home/david/mnt/ssd_0.5_nvme ntfs-3g defaults,nofail 0 2
+UUID=70F6C51AF6C4E208 /home/david/mnt/ssd_2_sata ntfs-3g defaults,nofail 0 2
 
-UUID=14A25E84A25E6A6E /home/david/mnt/hdd_1 ntfs-3g defaults 0 2
-UUID=8AC6984BC6983A01 /home/david/mnt/hdd_2 ntfs-3g defaults 0 2
+UUID=14A25E84A25E6A6E /home/david/mnt/hdd_1 ntfs-3g defaults,nofail 0 2
+UUID=8AC6984BC6983A01 /home/david/mnt/hdd_2 ntfs-3g defaults,nofail 0 2
 ```
 
 
