@@ -18,6 +18,12 @@ sudo make install
 ```
 
 ```
+sudo ln -s /opt/apps/lmod/lmod/lmod/init/profile /etc/profile.d/z00_lmod.sh
+sudo ln -s /opt/apps/lmod/lmod/lmod/init/cshrc /etc/profile.d/z00_lmod.csh
+```
+
+
+```
 eval "$(/opt/apps/lmod/lmod/lmod/libexec/lmod bash init)"
 module --version
 ```
