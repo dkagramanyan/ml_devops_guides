@@ -57,6 +57,11 @@ sudo systemctl status anydesk.service
 ## 3X-UI
 ---------
 
+cat certificate.crt certificate_ca.crt > fullchain.pem
+
+Public Key Path  /etc/letsencrypt/fullchain.pem
+Private Key Path /etc/letsencrypt/certificate.key
+
 Важно! Если сервис поднимается на машине в локальной сети, к которой трафик будет идти через переброс портов, то поле **ip** при натсройке сервера нужно оставить пустым и в итоговой ссылке клиента нужно заменить ip адрес сервера на домен
 
 По умолчанию 3X-UI поддерживает работу только на [хосте](https://www.metalnikovg.ru/blog/dvoynoe-tunnelirovanie-trafika-s-pomojyu-paneli-3xui)
