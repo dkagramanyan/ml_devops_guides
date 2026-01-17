@@ -53,3 +53,44 @@ api.individual.githubcopilot.com
 sudo systemctl enable anydesk.service
 sudo systemctl status anydesk.service
 ```
+
+## 3X-UI
+---------
+
+Важно! Если сервис поднимается на машине в локальной сети, к которой трафик будет идти через переброс портов, то поле **ip** при натсройке сервера нужно оставить пустым и в итоговой ссылке клиента нужно заменить ip адрес сервера на домен
+
+По умолчанию 3X-UI поддерживает работу только на [хосте](https://www.metalnikovg.ru/blog/dvoynoe-tunnelirovanie-trafika-s-pomojyu-paneli-3xui)
+
+```
+services:
+  3xui:
+    image: ghcr.io/mhsanaei/3x-ui:latest
+    container_name: 3xui_app
+    # hostname: yourhostname <- optional
+    volumes:
+      - $PWD/db/:/etc/x-ui/
+      - $PWD/cert/:/root/cert/
+      - /home/david/ssl_certificates:/etc/letsencrypt/
+    environment:
+      XRAY_VMESS_AEAD_FORCED: "false"
+      XUI_ENABLE_FAIL2BAN: "true"
+    tty: true
+    network_mode: host
+    restart: unless-stopped
+```
+
+```
+/ip firewall filter
+add chain=forward action=accept protocol=tcp \
+    src-address=192.168.1.0/24 \
+    dst-address=170.134.51.13 dst-port=2053 \
+    comment="Allow 3x ui web ONLY from LAN"
+```
+
+```
+/ip firewall filter
+add chain=forward action=drop protocol=tcp \
+    dst-address=170.134.51.13 dst-port=2053 \
+    in-interface-list=WAN \
+    comment="DROP 3x ui web panel from WAN"
+```
