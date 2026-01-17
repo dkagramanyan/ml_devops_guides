@@ -69,24 +69,6 @@ Kuma alerts
 docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
 ```
 
-## 3X-UI
----------
-
-Важно! Если сервис поднимается на машине в локальной сети, к которой трафик будет идти через переброс портов, то поле **ip** при натсройке сервера нужно оставить пустым и в итоговой ссылке клиента нужно заменить ip адрес сервера на домен
-
-По умолчанию 3X-UI поддерживает работу только на [хосте](https://www.metalnikovg.ru/blog/dvoynoe-tunnelirovanie-trafika-s-pomojyu-paneli-3xui)
-
-```
-sudo docker run -d \
-	 -e XRAY_VMESS_AEAD_FORCED=false \
-	 -e XUI_ENABLE_FAIL2BAN=true \
-	 -v $PWD/db/:/etc/x-ui/ \
-	 -v $PWD/cert/:/root/cert/ \
-	 --network=host \
-	 --restart=unless-stopped \
-	 ghcr.io/mhsanaei/3x-ui:latest
-```
-
 
 ## Монтирование дисков
 
