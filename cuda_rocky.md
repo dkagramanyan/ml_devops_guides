@@ -215,14 +215,70 @@ sudo dnf versionlock add nvidia-driver\* cuda\*
 
 ---
 
-## 13. Final checklist
+# Docker
 
-* `lspci | grep NVIDIA` → GPU visible
-* `lsmod | grep nvidia` → modules loaded
-* `modinfo nvidia` → GPL (open)
-* `nvidia-smi` → GPU detected
-* `nvcc --version` → CUDA works
+## 1 
 
----
+```
+sudo systemctl stop docker
+sudo systemctl stop docker.socket
+
+sudo mkdir -p /home/docker-data
+sudo nano /etc/docker/daemon.json
+```
+
+add 
+```
+{
+  "data-root": "/home/docker-data"
+}
+```
+
+```
+sudo rsync -aP /var/lib/docker/ /home/docker-data/
+sudo systemctl start docker
+docker info | grep "Docker Root Dir"
+```
+
+```
+sudo rm -rf /var/lib/docker
+```
+
+## 2
+
+```
+sudo systemctl stop docker docker.socket containerd
+
+sudo mkdir -p /home/containerd-data
+sudo rsync -aP /var/lib/containerd/ /home/containerd-data/
+sudo rm -rf /var/lib/containerd
+sudo ln -s /home/containerd-data /var/lib/containerd
+
+sudo systemctl start containerd docker
+
+# Verify
+docker images
+df -h
+```
+
+## 3
+
+```
+cd /opt
+sudo mkdir services
+sudo mv /opt/services /home/services
+sudo ln -s /home/services /opt/services
+```
+
+# GPUStack
+
+```
+sudo firewall-cmd --permanent --add-port=10150/tcp
+sudo firewall-cmd --permanent --add-port=10151/tcp
+sudo firewall-cmd --permanent --add-port=40000-40063/tcp
+sudo firewall-cmd --permanent --add-port=41000-41999/tcp
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-ports
+```
 
 This setup is **stable, future-proof, and compatible with new-generation NVIDIA GPUs on Rocky Linux 9**.
