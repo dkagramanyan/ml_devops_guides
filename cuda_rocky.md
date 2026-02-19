@@ -293,6 +293,18 @@ sudo mv /opt/services /home/services
 sudo ln -s /home/services /opt/services
 ```
 
+# docker
+
+docker: Error response from daemon: unknown or invalid runtime name: nvidia
+
+```
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-container-toolkit/$distribution/nvidia-container-toolkit.repo | sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo
+
+sudo dnf clean expire-cache
+sudo dnf install -y nvidia-container-toolkit
+```
+
 # GPUStack
 
 ```
