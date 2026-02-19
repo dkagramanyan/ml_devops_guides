@@ -213,6 +213,29 @@ sudo dnf install -y dnf-plugin-versionlock
 sudo dnf versionlock add nvidia-driver\* cuda\*
 ```
 
+# cuda update
+
+```bash
+rpm -qa | egrep 'nvidia|cuda' | sort
+
+# 1) remove ELRepo NVIDIA driver packages that conflict
+sudo dnf remove -y 'kmod-nvidia*' 'nvidia-x11-drv*'
+
+# 2) reset module state to avoid "modular filtering" issues
+sudo dnf module reset -y nvidia-driver
+
+# 3) clean metadata
+sudo dnf clean all
+sudo dnf makecache
+
+# 4) enable & install NVIDIA open kernel modules via CUDA repo module
+sudo dnf module enable  -y nvidia-driver:open-dkms
+sudo dnf module install -y nvidia-driver:open-dkms
+
+# 5) reboot to load the new kernel module
+sudo reboot
+```
+
 ---
 
 # Docker
