@@ -303,6 +303,9 @@ curl -s -L https://nvidia.github.io/nvidia-container-toolkit/$distribution/nvidi
 
 sudo dnf clean expire-cache
 sudo dnf install -y nvidia-container-toolkit
+
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
 ```
 
 # GPUStack
