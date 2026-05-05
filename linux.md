@@ -82,7 +82,9 @@ sudo blkid # определяем UUID дисков
 
 ```
 UUID=B4BE2F86BE2F3FEA /home/david/mnt/ssd_0.5_nvme ntfs-3g defaults,uid=1000,gid=1000,umask=0000,nofail 0 2
-UUID=70F6C51AF6C4E208 /home/david/mnt/ssd_2_sata ntfs-3g defaults,uid=1000,gid=1000,umask=0000,nofail 0 2
+
+# sata 2 tb
+UUID=b5e34419-9f0d-418d-9f79-06faea26d90e  /home/david/mnt/ssd_2_sata  xfs  defaults,noatime,nofail  0 2
 
 UUID=14A25E84A25E6A6E /home/david/mnt/hdd_1 ntfs-3g defaults,uid=1000,gid=1000,umask=0000,nofail 0 2
 UUID=8AC6984BC6983A01 /home/david/mnt/hdd_2 ntfs-3g defaults,uid=1000,gid=1000,umask=0000,nofail 0 2
