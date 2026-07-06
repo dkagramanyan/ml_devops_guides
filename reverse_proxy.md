@@ -1,6 +1,6 @@
 # Reverse proxy на Raspberry Pi с wildcard-сертификатом Let's Encrypt
 
-Руководство по настройке домена в Selectel, выпуску wildcard-сертификата, обратного прокси Traefik и разрешению имён внутри локальной сети через MikroTik. Docker-часть опущена.
+Руководство по настройке домена в Selectel, выпуску wildcard-сертификата, обратного прокси Traefik, разрешению имён внутри локальной сети через MikroTik и мониторингу через Grafana. Docker-часть опущена.
 
 ## Итоговая схема
 
@@ -85,11 +85,14 @@ SELECTELV2_USERNAME=dns-acme
 SELECTELV2_PASSWORD='пароль'
 SELECTELV2_ACCOUNT_ID=312045
 SELECTELV2_PROJECT_ID=7f3e9a1c8b6d4f20a5c1e8d9b2f04a6c
+
+# admin:хеш  — сгенерировать: htpasswd -nbB admin 'пароль' | sed -e 's/\$/\$\$/g'
+DASHBOARD_AUTH=admin:...
 ```
 
 ## 5. Статическая конфигурация Traefik `traefik.yml`
 
-Меняется редко, изменения требуют пересоздания контейнера.
+Меняется редко, изменения требуют пересоздания контейнера. Здесь же включена точка входа `metrics` для Prometheus (раздел 10).
 
 ```yaml
 api:
@@ -105,10 +108,13 @@ entryPoints:
           scheme: https
   websecure:
     address: ":443"
+  metrics:
+    address: ":8082"
 
 providers:
   docker:
     exposedByDefault: false
+    network: proxy
   file:
     directory: /etc/traefik/dynamic
     watch: true
@@ -130,52 +136,100 @@ certificatesResolvers:
           - "a.ns.selectel.ru:53"
           - "b.ns.selectel.ru:53"
 
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addRoutersLabels: true
+    addServicesLabels: true
+
 log:
   level: INFO
 accessLog: {}
 ```
 
-## 6. Динамическая маршрутизация `dynamic/native-services.yml`
+## 6. Два провайдера маршрутов
+
+Traefik собирает маршруты из двух источников одновременно:
+
+- **docker** — читает метки (`labels`) на контейнерах стека. Так объявлен роутер `dashboard`, который заодно запрашивает wildcard-сертификат.
+- **file** — читает `dynamic/*.yml`. Здесь описаны все остальные сервисы, включая внешние бэкенды и контейнеры стека.
+
+В списке роутеров дашборда провайдер виден в имени: `kuma@file`, `dashboard@docker`.
+
+## 7. Динамическая маршрутизация `dynamic/native-services.yml`
 
 Описывает маршруты к сервисам. Файл **перечитывается на лету** (`watch: true`), перезапуск не нужен. Один роутер и один сервис на каждое имя.
+
+Правила для URL бэкенда:
+
+- обычный HTTP: `url: "http://host:port"`
+- HTTPS с самоподписанным сертификатом (Omada, Proxmox): `url: "https://host:port"` плюс `serversTransport: insecure-backend`.
 
 ```yaml
 http:
   routers:
     kuma:
       rule: "Host(`kuma.dgkagramanyan.ru`)"
-      entryPoints:
-        - websecure
+      entryPoints: [websecure]
       service: kuma
-      tls: {}          # использует уже выпущенный wildcard
+      tls: {}
 
-    jupyterlab:
-      rule: "Host(`jupyterlab.dgkagramanyan.ru`)"
-      entryPoints:
-        - websecure
-      service: jupyterlab
+    omada:
+      rule: "Host(`omada.dgkagramanyan.ru`)"
+      entryPoints: [websecure]
+      service: omada
+      tls: {}
+
+    proxmox:
+      rule: "Host(`proxmox.dgkagramanyan.ru`)"
+      entryPoints: [websecure]
+      service: proxmox
+      tls: {}
+
+    grafana:
+      rule: "Host(`grafana.dgkagramanyan.ru`)"
+      entryPoints: [websecure]
+      service: grafana
       tls: {}
 
   services:
     kuma:
       loadBalancer:
         servers:
-          - url: "http://raspberrypi:3001"      # сервис на самом Pi
+          - url: "http://raspberrypi:3001"
 
-    jupyterlab:
+    omada:
+      loadBalancer:
+        serversTransport: insecure-backend
+        servers:
+          - url: "https://raspberrypi:8043"
+
+    proxmox:
+      loadBalancer:
+        serversTransport: insecure-backend
+        servers:
+          - url: "https://acserver:8006"
+
+    grafana:
       loadBalancer:
         servers:
-          - url: "http://192.168.88.50:8888"    # сервис на другой машине LAN
+          - url: "http://grafana:3000"
+
+  serversTransports:
+    insecure-backend:
+      insecureSkipVerify: true
 ```
 
 Адрес бэкенда задаётся в `url`. Это не редирект: Traefik терминирует TLS на себе и проксирует запрос на бэкенд по обычному HTTP. Браузер остаётся на `https://имя.dgkagramanyan.ru`.
 
+Если бэкенд — это контейнер стека (например `grafana`), обращение идёт по имени контейнера (`http://grafana:3000`), контейнер должен быть в сети `proxy`. Если имя хоста (`homepc`, `acserver`, `openwrt`) не резолвится изнутри контейнера Traefik, добавить его в `extra_hosts` контейнера traefik в docker-compose.
+
 **Когда нужен перезапуск, а когда нет:**
 
 - Правки в `dynamic/*.yml` — подхватываются сами, перезапуск не нужен.
-- Правки в `traefik.yml` — нужен пересоздать контейнер.
+- Правки в `traefik.yml` или `docker-compose.yml` — нужно пересоздать контейнер.
 
-## 7. Выпуск сертификата: staging → production
+## 8. Выпуск сертификата: staging → production
 
 Let's Encrypt ограничивает число неудачных попыток (5 на домен в час). Сначала отлаживайте на staging.
 
@@ -207,7 +261,7 @@ echo | openssl s_client -connect raspberrypi:443 -servername kuma.dgkagramanyan.
 
 Если после выпуска браузер показывает предупреждение — это кеш staging. Жёсткое обновление (Ctrl+Shift+R) или режим инкогнито.
 
-## 8. Разрешение имён внутри LAN (split-DNS на MikroTik)
+## 9. Разрешение имён внутри LAN (split-DNS на MikroTik)
 
 Публичный DNS указывает на публичный IP. Чтобы клиенты в локальной сети шли напрямую на Pi, а не через интернет, MikroTik должен переопределять эти имена на локальный IP Pi.
 
@@ -242,7 +296,74 @@ add name=dgkagramanyan.ru address=192.168.88.X
 nslookup jupyterlab.dgkagramanyan.ru   # должен вернуть локальный IP Pi
 ```
 
-## 9. Публикация сервиса в интернет
+## 10. Мониторинг: Prometheus + Grafana
+
+Схема: **Traefik отдаёт метрики (:8082) → Prometheus собирает → Grafana рисует**. Метрики уже включены в `traefik.yml` (раздел 5). Traefik помечает каждый запрос именем роутера, поэтому разбивка по сервисам работает из коробки. Ключевая метрика — `traefik_router_requests_total` с метками `router`, `service`, `code`, `method`.
+
+### Конфиг Prometheus `prometheus.yml`
+
+Положить рядом с `docker-compose.yml`. Важно: это должен быть **файл**, а не каталог — если Docker при первом запуске создал каталог с таким именем, удалить его (`rm -rf prometheus.yml`) и создать файл заново.
+
+```yaml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: traefik
+    static_configs:
+      - targets: ["traefik:8082"]
+```
+
+### Контейнеры Prometheus и Grafana
+
+Оба в сети `proxy`. Маршрут `grafana.dgkagramanyan.ru` описан в `dynamic/native-services.yml` (раздел 7), поэтому на контейнере Grafana меток Traefik нет.
+
+```yaml
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - proxy
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=смените_пароль
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - proxy
+
+# верхнеуровневый блок volumes:
+# volumes:
+#   prometheus-data:
+#   grafana-data:
+```
+
+### Подключение и дашборд
+
+1. Открыть `https://grafana.dgkagramanyan.ru`, войти `admin` / пароль из `GF_SECURITY_ADMIN_PASSWORD`.
+2. Connections → Data sources → Add → Prometheus → URL `http://prometheus:9090` → Save & test.
+3. Dashboards → Import → загрузить `traefik-dashboard.json` (или ввести ID официального дашборда Traefik v3: **17346**) → выбрать источник Prometheus.
+
+Панели с разбивкой по сервисам: скорость запросов, доля запросов, коды ответов, задержка p95, суммарно за период.
+
+Полезные запросы PromQL:
+
+```promql
+sum by (router) (rate(traefik_router_requests_total[1m]))                 # req/s на сервис
+sum by (router) (rate(traefik_router_requests_total{code=~"5.."}[1m]))    # только ошибки 5xx
+sum by (router) (increase(traefik_router_requests_total[$__range]))       # всего за период
+```
+
+## 11. Публикация сервиса в интернет
 
 Весь внешний трафик идёт через Traefik на портах 80/443. Порт на каждый сервис открывать не нужно.
 
@@ -272,7 +393,7 @@ add chain=forward action=accept protocol=tcp dst-port=80,443 \
 
 ### Ограничение доступа к чувствительным сервисам
 
-Wildcard делает публично резолвимыми все поддомены. Админки (AdGuard, дашборд Traefik, JupyterLab) наружу выставлять не стоит. Ограничить их middleware по IP, оставив порт открытым только для LAN:
+Wildcard делает публично резолвимыми все поддомены. Админки (Proxmox, LuCI, Omada, OpenVPN UI, дашборд Traefik, Grafana) наружу выставлять не стоит. Ограничить их middleware по IP, оставив порт открытым только для LAN:
 
 ```yaml
 http:
@@ -283,10 +404,10 @@ http:
           - "192.168.88.0/24"
           - "127.0.0.1/32"
   routers:
-    adguard:
-      rule: "Host(`adguard.dgkagramanyan.ru`)"
+    proxmox:
+      rule: "Host(`proxmox.dgkagramanyan.ru`)"
       entryPoints: [websecure]
-      service: adguard
+      service: proxmox
       tls: {}
       middlewares: [lan-only]   # интернет получит 403
 ```
@@ -296,7 +417,8 @@ http:
 ### Обязательный минимум по безопасности
 
 - На всех сервисах без собственной авторизации включить логин или middleware `lan-only`.
-- Дашборд Traefik никогда не делать публичным (basic-auth или `lan-only`).
+- Дашборд Traefik и Grafana никогда не делать публичными без пароля (basic-auth или `lan-only`).
+- Панели администрирования (Proxmox, LuCI, Omada, OpenVPN) держать за `lan-only`.
 - Split-DNS оставляет клиентов LAN на прямом пути к Pi, hairpin NAT не задействуется.
 - Держать Pi в актуальном состоянии, рассмотреть fail2ban и rate-limiting.
 
@@ -304,9 +426,10 @@ http:
 
 1. Имя уже покрыто wildcard-сертификатом и regex MikroTik — Selectel трогать не нужно.
 2. Добавить пару router + service в `dynamic/native-services.yml`, указать `url` бэкенда.
-3. Сохранить файл — Traefik подхватит сам.
-4. При необходимости закрыть сервис middleware `lan-only`.
-5. Открыть `https://имя.dgkagramanyan.ru`.
+3. Для HTTPS-бэкенда с самоподписанным сертификатом добавить `serversTransport: insecure-backend`.
+4. Сохранить файл — Traefik подхватит сам.
+5. При необходимости закрыть сервис middleware `lan-only`.
+6. Открыть `https://имя.dgkagramanyan.ru`.
 
 ## Типичные проблемы
 
@@ -317,3 +440,7 @@ http:
 | `too many failed authorizations (5)` | Лимит Let's Encrypt. Перейти на staging, дождаться сброса лимита. |
 | Браузер: «не защищено» после выпуска | Ещё staging-сертификат либо кеш. Проверить издателя через openssl, обновить страницу жёстко. |
 | `client version 1.24 is too old` | Старый Traefik с Docker 29+. Обновить образ Traefik до v3.7+. |
+| `tls: failed to verify certificate: valid for X, not raspberrypi` | HTTPS-бэкенд с самоподписанным сертификатом. Добавить `serversTransport: insecure-backend`. |
+| `not a directory: mount prometheus.yml` | Docker создал каталог вместо файла. `rm -rf prometheus.yml`, создать заново как файл. |
+| `mapping values are not allowed` | Ошибка отступов в YAML. `serversTransport` и `servers` — на одном уровне внутри `loadBalancer`. |
+| Grafana 404 | Опечатка `graphana` вместо `grafana`, либо контейнер не в сети `proxy`. |
